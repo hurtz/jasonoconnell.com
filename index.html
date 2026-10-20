@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jason O'Connell</title>
+<meta name="description" content="Jason O'Connell (hurtz2k) makes weird games, retro teardowns and odd machines at night in Des Moines, Iowa. Find his games at Plain Weird Games and his art at Hourly Absurdity.">
+<meta name="author" content="Jason O'Connell">
+<meta property="og:title" content="Jason O'Connell">
+<meta property="og:description" content="I make weird things. Games at Plain Weird Games, absurd pictures at Hourly Absurdity.">
+<meta property="og:url" content="https://jasonoconnell.com/">
+<meta property="og:image" content="https://jasonoconnell.com/img/hourly-absurdity.jpg">
+<link rel="canonical" href="https://jasonoconnell.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23f6c945'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Georgia,serif' font-weight='700' text-anchor='middle' fill='%232f3b2c'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://jasonoconnell.com/#jason","name":"Jason O'Connell","alternateName":"hurtz2k","url":"https://jasonoconnell.com/","homeLocation":"Des Moines, Iowa","sameAs":["https://github.com/hurtz","https://www.reddit.com/user/hurtz2k/","https://www.linkedin.com/in/jloconne/"],"owns":[{"@type":"WebSite","name":"Plain Weird Games","url":"https://plainweirdgames.com/"},{"@type":"WebSite","name":"Hourly Absurdity","url":"https://www.instagram.com/hourlyabsurdity/"}]}</script>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f7f3e8; --ink:#2f3b2c; --soft:#5d6b58; --line:#e2dccb;
+  --sage:#dfe8d6; --sage-ink:#3e5a3a;
+  --sun:#fbe7a1; --sun-ink:#7a5a00; --sun-hi:#f6c945;
+  --sky:#dde9ef; --sky-ink:#2f5466;
+  --card:#fffdf7;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 Figtree,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:56px 20px 40px}
+.hello{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.badge{width:84px;height:84px;border-radius:24px;background:var(--sun-hi);display:grid;place-items:center;font:800 48px/1 "Bricolage Grotesque",sans-serif;color:var(--ink);transform:rotate(-6deg);box-shadow:0 6px 0 #e3b52d}
+h1{font:800 clamp(40px,8vw,64px)/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;margin:0}
+.handle{color:var(--soft);font-weight:500;margin-top:6px}
+.intro{font-size:clamp(19px,2.6vw,22px);line-height:1.5;margin:28px 0 8px;max-width:640px}
+.intro b{background:linear-gradient(transparent 58%,var(--sun) 58%);font-weight:600}
+.small{color:var(--soft);margin:0 0 36px;max-width:620px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;text-decoration:none;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--line);transition:transform .15s ease,box-shadow .15s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(47,59,44,.12)}
+.pic{height:150px;display:grid;place-items:center;overflow:hidden}
+.pic img{display:block}
+.games .pic{background:var(--sage)}
+.games .pic img{width:118px;height:118px}
+.absurd .pic{background:var(--sun)}
+.absurd .pic img{width:100%;height:100%;object-fit:cover}
+.code .pic{background:var(--sky)}
+.code .pic span{font:800 54px/1 "Bricolage Grotesque",sans-serif;color:var(--sky-ink)}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px;flex:1}
+.tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.games .tag{color:var(--sage-ink)} .absurd .tag{color:var(--sun-ink)} .code .tag{color:var(--sky-ink)}
+.card h2{font:700 24px/1.15 "Bricolage Grotesque",sans-serif;margin:2px 0}
+.card p{margin:0;color:var(--soft);font-size:15.5px}
+.go{margin-top:auto;padding-top:12px;font-weight:600;font-size:15px}
+.games .go{color:var(--sage-ink)} .absurd .go{color:var(--sun-ink)} .code .go{color:var(--sky-ink)}
+.elsewhere{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.elsewhere span{color:var(--soft);font-weight:500;margin-right:4px}
+.pill{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);text-decoration:none;font-weight:500;font-size:15px}
+.pill:hover{background:var(--sage)}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);color:var(--soft);font-size:13.5px}
+@media (max-width:520px){.wrap{padding:36px 16px 32px}.badge{width:68px;height:68px;font-size:38px;border-radius:20px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hello">
+    <div class="badge" aria-hidden="true">J</div>
+    <div>
+      <h1>Jason O'Connell</h1>
+      <div class="handle">hurtz2k · Des Moines, Iowa</div>
+    </div>
+  </header>
+
+  <p class="intro">I make <b>weird things</b>. Games, retro teardowns, tools and odd little machines, built at night with AI as the crew.</p>
+  <p class="small">I've been in IT since 1994, when I started at a little computer store in Phoenix. These days I mostly connect ideas that probably shouldn't go together and see what happens.</p>
+
+  <section class="cards" aria-label="Where my stuff lives">
+    <a class="card games" href="https://plainweirdgames.com/">
+      <div class="pic"><img src="img/plain-weird-logo.png" alt="Plain Weird logo, an Iowa water tower standing on bird legs" width="118" height="118"></div>
+      <div class="body">
+        <span class="tag">Games</span>
+        <h2>Plain Weird Games</h2>
+        <p>My games, ranked. Most of them play free right in your browser.</p>
+        <span class="go">plainweirdgames.com →</span>
+      </div>
+    </a>
+    <a class="card absurd" href="https://www.instagram.com/hourlyabsurdity/" target="_blank" rel="noopener">
+      <div class="pic"><img src="img/hourly-absurdity.jpg" alt="Hourly Absurdity artwork" width="640" height="360"></div>
+      <div class="body">
+        <span class="tag">Art</span>
+        <h2>Hourly Absurdity</h2>
+        <p>Absurd ideas, turned into pictures. The thing that got me making stuff with AI.</p>
+        <span class="go">@hourlyabsurdity →</span>
+      </div>
+    </a>
+    <a class="card code" href="https://github.com/hurtz" target="_blank" rel="noopener">
+      <div class="pic"><span aria-hidden="true">&lt;/&gt;</span></div>
+      <div class="body">
+        <span class="tag">Code</span>
+        <h2>GitHub</h2>
+        <p>The code behind most of it, open for anyone to poke at.</p>
+        <span class="go">github.com/hurtz →</span>
+      </div>
+    </a>
+  </section>
+
+  <nav class="elsewhere" aria-label="Find me elsewhere">
+    <span>Say hi:</span>
+    <a class="pill" href="https://www.linkedin.com/in/jloconne/" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="pill" href="https://www.reddit.com/user/hurtz2k/" target="_blank" rel="noopener">Reddit u/hurtz2k</a>
+  </nav>
+
+  <footer>Looking for a game that used to live here? Everything moved to <a href="https://plainweirdgames.com/">plainweirdgames.com</a>.</footer>
+</main>
+</body>
+</html>

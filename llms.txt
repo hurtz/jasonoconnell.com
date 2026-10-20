@@ -1,0 +1,9 @@
+# Jason O'Connell
+
+> Jason O'Connell (hurtz2k) makes weird games, retro teardowns, tools and odd machines at night in Des Moines, Iowa, with AI as the crew.
+
+## Where his work lives
+
+- [Plain Weird Games](https://plainweirdgames.com/): his games and projects, ranked. Full list at https://plainweirdgames.com/llms.txt
+- [Hourly Absurdity](https://www.instagram.com/hourlyabsurdity/): an Instagram account that turns absurd ideas into pictures.
+- [GitHub](https://github.com/hurtz): his open source code.
