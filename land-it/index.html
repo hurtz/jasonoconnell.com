@@ -408,6 +408,11 @@ button,.seg button,.modes button{touch-action:manipulation}
 .an.ok rect{fill:var(--ok)} .an.ok text{fill:#06210F}
 .an.miss rect{fill:var(--surface); stroke:var(--n-r); stroke-width:2.2} .an.miss text{fill:var(--n-r)}
 .heard a{color:inherit; font-weight:800}
+.npill .nw{font-style:normal; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--accent); margin-left:-2px}
+.newn{margin:6px 0 4px; padding-left:20px} .newn li{margin:5px 0}
+.bnd{fill:none; stroke:var(--ink); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+.bl{font:800 10px var(--body); fill:var(--ink); text-anchor:middle}
+.an.sm text{font-size:11.5px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important; animation:none!important}}
 </style>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -549,19 +554,19 @@ const STYLE={
 };
 const WALTZ={kick:[0],snare:[2,4],hat:[0,1,2,3,4,5],bass:[[0,2,0],[2,2,7],[4,2,7]],hits:[[0,2],[2,2],[4,2]]};
 const PRESETS=[
- {id:'so-into-you',title:'So Into You',artist:'Atlanta Rhythm Section',section:'Outro fade solo',key:'F',mode:'minor',bpm:86,bpb:4,tuning:0,feel:'soft',pent:'minor',changes:'Bb7:2 Fm7:2',
-  tip:'Stay in the F minor pentatonic box. The magic note is D: it is not in the box, but it is the 3rd of B♭7. Hit it as B♭7 lands, then nudge it up one fret to E♭ when Fm7 comes back.',
-  check:'Bar counts are a best guess. Match them to the record with − and +.'},
- {id:'war-pigs',title:'War Pigs',artist:'Black Sabbath',section:'End solo',key:'E',mode:'minor',bpm:138,bpb:4,tuning:0,feel:'heavy',pent:'minor',changes:'D:2 Em:2',
-  tip:'E minor pentatonic does most of the work. On the D chord, bend E up a whole step to F♯. When Em comes back, let it fall back to E or push on up to G.',
-  check:'138 is the listed tempo for the song. Bar counts are a best guess.'},
+ {id:'so-into-you',title:'So Into You',artist:'Atlanta Rhythm Section',section:'Outro fade solo',key:'F',mode:'minor',bpm:86,bpb:4,tuning:0,feel:'soft',pent:'minor',changes:'Bbm7:2 Fm7:2',
+  tip:'Stay in the F minor pentatonic box. The magic note is D♭, the 3rd of B♭m7. It sits just outside the box at 14 on the B string, so fret it, then drop one fret to C when Fm7 comes back.',
+  check:'Most charts show B♭m7 here and a few show B♭7, so check it by ear. Bar counts are a best guess.'},
+ {id:'war-pigs',title:'War Pigs',artist:'Black Sabbath',section:'End solo',key:'E',mode:'minor',bpm:92,bpb:4,tuning:0,feel:'heavy',pent:'minor',changes:'D:2 Em:2',
+  tip:'E minor pentatonic does most of the work. On the D chord, fret F♯ at 14 on the high e, or bend 14 on the D string up a whole step. When Em comes back, let it fall back to E or push on up to G.',
+  check:'The record sits near 92 BPM and speeds up near the end. The D to Em loop is a best guess, so check it against the record.'},
  {id:'sharp-dressed-man',title:'Sharp Dressed Man',artist:'ZZ Top',section:'Guitar solo',key:'C',mode:'major',bpm:125,bpb:4,tuning:0,feel:'boogie',pent:'minor',changes:'C7:20 F7:4',
-  tip:'Ride C minor pentatonic through the long C7 stretch and push the E♭ slightly sharp for that ZZ Top grit. When F7 hits, bend G up a whole step to A, or land right on E♭.',
-  check:'Bar counts are a best guess. Match them to the record with − and +.'},
- {id:'get-back',title:'Get Back',artist:'The Beatles',section:'Guitar solos',key:'A',mode:'major',bpm:124,bpb:4,tuning:0,feel:'rock',pent:'major',changes:'A7:3 D7:1',
-  tip:'Land on C♯ for A7 and F♯ for D7. For the classic rock and roll lick, switch the scale to minor pent and hammer C up to C♯.',
-  check:'Bar counts are a best guess. Match them to the record with − and +.'},
- {id:'round-and-round',title:'Round and Round',artist:'Ratt',section:'Guitar solo',key:'Ab',mode:'minor',bpm:127,bpb:4,tuning:-1,feel:'rock',pent:'minor',changes:'Abm:2 Gb:1 E:1 Gb:1 Abm:1 Gb:1 E:1 Ebm:1 B:1 Gb:1',
+  tip:'Ride C minor pentatonic through the long C7 stretch and push the E♭ slightly sharp for that ZZ Top grit. When F7 hits, fret A at 10 on the B string, or land right on E♭.',
+  check:'Two charts add a B♭ to G turnaround before F. Bar counts are a best guess, so match them to the record with − and +.'},
+ {id:'get-back',title:'Get Back',artist:'The Beatles',section:'Guitar solos',key:'A',mode:'major',bpm:123,bpb:4,tuning:0,feel:'rock',pent:'minor',changes:'A7:2 D7:1 A7:1',
+  tip:'Stay in your home box at fret 5. Land on C♯ for A7: curl C up a half step on the G string, or hammer 5 to 6. For D7, fret F♯ at 7 on the B string.',
+  check:'Three charts agree on A7, A7, D7, A7 for the solo.'},
+ {id:'round-and-round',title:'Round and Round',artist:'Ratt',section:'Guitar solo',key:'Ab',mode:'minor',bpm:127,bpb:4,tuning:-1,feel:'rock',pent:'minor',changes:'Abm:3 Gb:1 E:1 Gb:1 Abm:1 Gb:1 E:1 Gb:1 Abm:1 Gb:1 E:1 Ebm:1 B:1 Gb:1',
   tip:'Tuned down a half step, so think in A minor shapes. A minor pentatonic around fret 5 covers the whole solo. Land on C over Am, B over G, A over F and G over Em.',
   check:'Chords come from a fan chart. On the record a few chords last half a bar; here each gets a full bar so you can catch it. 127 BPM comes from a tempo database.'}
 ];
@@ -824,6 +829,7 @@ function shift(){return tx()-tuning();}          // concert pitch + shift = the 
 function keyS(){return mod(song().key+shift());}
 function keyC(){return mod(song().key+tx());}
 function pentType(){return A().pent||song().pent;}
+function keyWord(){return song().mode==='major'&&pentType()==='minor'?'blues':song().mode;}
 function bpm(){return A().bpm||song().bpm;}
 function gtun(){return 0;}                        // shapes are worked out in standard layout
 function flatsFor(k){const maj=song().mode==='minor'?mod(k+3):k; return ![7,2,9,4,11,6].includes(maj);}
@@ -1057,7 +1063,7 @@ function renderHeader(){
   const sg=song(), t=tuning();
   {const a=$('sgrLink'); if(a){a.href=sgrUrl(sg); a.setAttribute('aria-label',`Open ${sg.title} in Songsterr`);}}
   $('songTitle').textContent=sg.title; $('songArtist').textContent=sg.artist+(sg.section?' · '+sg.section:'');
-  $('meta').innerHTML=`<span class="kl">Key</span><b class="kn">${esc(keyName())} ${sg.mode}</b>`+(t?`<span class="kt">${TUN_SHORT[String(t)]} tuning · ${esc(nm(keyS()))} ${sg.mode} shapes</span>`:'');
+  $('meta').innerHTML=`<span class="kl">Key</span><b class="kn">${esc(keyName())} ${keyWord()}</b>`+(t?`<span class="kt">${TUN_SHORT[String(t)]} tuning · ${esc(nm(keyS()))} ${sg.mode} shapes</span>`:'');
 }
 function renderChips(pop){
   const f=form(), cur=curChord(), nx=nxtChord(), bpb=song().bpb, kc=keyChords();
@@ -1237,7 +1243,7 @@ function runStep(t){
   if(pStep>=f[pIdx].bars*n){pIdx=(pIdx+1)%f.length; pStep=0;}
   const c=f[pIdx], s=pStep%n, st=pattern(), tt=t+((s%2&&st.swing)?stepDur()*st.swing:0);
   if(actx){ if(S.sound==='band') playBand({r:c.cr,ints:c.ints},s,tt,st); else if(S.sound==='click'&&s%2===0) blip(t,s===0); }
-  if(S.mode==='along'&&ALONG){const evs=ALONG.map.get(pIdx+':'+pStep); if(evs) evs.forEach(ev=>{ if(!S.myTurn&&actx) pluckAt(realMidi(ev.s,ev.f),t,ev.dur*60/bpm()); later(t,()=>alongLight(ev)); });}
+  if(S.mode==='along'&&ALONG){const evs=ALONG.map.get(pIdx+':'+pStep); if(evs) evs.forEach(ev=>{ if(!S.myTurn&&actx) pluckAt(realMidi(ev.s,ev.f),t,ev.dur*60/bpm(),ev.bend); later(t,()=>alongLight(ev)); });}
   if(s%2===0){const pi=pIdx, b=pStep/2; later(t,()=>onBeat(pi,b));}
   pStep++;
 }
@@ -1401,8 +1407,10 @@ function poolFor(c,box){
     if(!(inBox||tm.has(pc))) continue; const midi=STD[s2]+fr, o=out.get(midi); if(!o||(inBox&&!o.inBox)) out.set(midi,{s:s2,f:fr,midi,inBox});}
   return [...out.values()].sort((x,y)=>x.midi-y.midi);
 }
+function spotFor(pool,pc,ref,prevS){let best=null,bd=1e9; pool.forEach(p=>{if(mod(p.midi)!==pc) return; const d=Math.abs(p.midi-ref)+(p.s<=1?4:0)+(prevS!=null?3*Math.max(0,Math.abs(p.s-prevS)-2):0); if(d<bd){bd=d; best=p;}}); return best;}
 function nearestPc(pool,pc,ref){let best=null,bd=1e9; pool.forEach(p=>{if(mod(p.midi)!==pc) return; const d=Math.abs(p.midi-ref); if(d<bd){bd=d; best=p;}}); return best;}
 function boxMid(box){return (STD[2]+STD[3])/2+(box.a+box.b)/2;}
+function phraseV(pool,end,up,v){if(!end) return []; const i=pool.indexOf(end); if(i<0) return [end]; const S=up?[[-2,-1,0],[-3,-1,0],[1,-1,0]]:[[2,1,0],[3,1,0],[-1,1,0]]; return S[v%3].map(o=>pool[clamp(i+o,0,pool.length-1)]).filter((p,k,a)=>k===0||p!==a[k-1]);}
 function phrase3(pool,end,up){if(!end) return []; const i=pool.indexOf(end); if(i<0) return [end]; const ids=up?[i-2,i-1,i]:[i+2,i+1,i]; return ids.map(j=>pool[clamp(j,0,pool.length-1)]).filter((p,k,a)=>k===0||p!==a[k-1]);}
 
 /* ---------- modes ---------- */
@@ -1428,15 +1436,32 @@ function applyLens(fi){
 
 /* ---------- coach ---------- */
 function uniqueChords(){const f=form(), seen=new Set(); return f.map((c,i)=>({c,i})).filter(o=>!seen.has(o.c.name)&&seen.add(o.c.name));}
-function notePill(t,p){return `<span class="npill" style="--c:var(--n-${t.role})"><i>${esc(nm(t.pc))}</i>${t.word}${p?`<small>${p.f} on ${STR_LBL[p.s]}</small>`:''}</span>`;}
+function notePill(t,p){return `<span class="npill" style="--c:var(--n-${t.role})"><i>${esc(nm(t.pc))}</i>${t.word}${p?`<small>${p.f} on ${STR_LBL[p.s]}</small>`:''}${p&&!p.inBox?'<em class="nw">new</em>':''}</span>`;}
+// a box note on B, G or high e that bends up to this note (whole step first, then half step)
+function bendTo(box,pc,ref,semis){
+  let best=null,bd=1e9; const K=FRETS+1;
+  [4,3,5].forEach(s2=>(semis?[semis]:[2,1]).forEach(st=>{for(let fr=Math.max(1,box.a);fr<=Math.min(FRETS-2,box.b);fr++){ if(!box.keys.has(s2*K+fr)||(st===2&&fr<box.a+2)) continue; const m=STD[s2]+fr; if(mod(m+st)!==pc) continue;
+    const d=Math.abs(m+st-ref)+(st===1?1:0)+(s2===5?1:0); if(d<bd){bd=d; best={s:s2,f:fr,midi:m,inBox:true,bend:st};}}}));
+  return best;
+}
+// target notes that sit outside the pentatonic shape, with the easiest way to reach each one
+function newNotes(chs,box){
+  const out=[], seen=new Set(), ref=boxMid(box), K=FRETS+1, FW=['index','middle','ring','pinky'];
+  chs.forEach(({c})=>{const pool=poolFor(c,box); targets3(c).forEach(t=>{const p=spotFor(pool,t.pc,ref); if(!p||p.inBox||seen.has(c.name+t.pc)) return; seen.add(c.name+t.pc);
+    const ways=[`fret ${p.f} on ${STR_LBL[p.s]} with your ${FW[clamp(p.f-box.a,0,3)]} finger`];
+    const hm=box.keys.has(p.s*K+p.f-1)?p.f-1:(box.keys.has(p.s*K+p.f-2)?p.f-2:null); if(hm!=null) ways.push(`hammer on from ${hm} to ${p.f}`);
+    const b=bendTo(box,t.pc,p.midi); if(b) ways.push(`bend ${b.f} on ${STR_LBL[b.s]} up ${b.bend===2?'a whole step':'a half step'}`);
+    out.push(`<li><b>${esc(nm(t.pc))}</b>, the ${t.word} of ${esc(c.name)}: ${ways.join(', or ')}.</li>`);});});
+  return out;
+}
 function notesTable(chs,box){
   const cn=form()[idx]&&form()[idx].name;
   return `<div class="nrows">${chs.map(({c,i})=>{const T=targets3(c), pool=poolFor(c,box), ref=boxMid(box);
-    return `<button type="button" class="nrow${c.name===cn?' on':''}" data-chord="${i}" aria-label="Show the notes for ${esc(c.name)}"><b class="nch">${esc(c.name)}</b><span class="pills">${T.map(t=>notePill(t,nearestPc(pool,t.pc,ref))).join('')}</span></button>`;}).join('')}</div>`;
+    return `<button type="button" class="nrow${c.name===cn?' on':''}" data-chord="${i}" aria-label="Show the notes for ${esc(c.name)}"><b class="nch">${esc(c.name)}</b><span class="pills">${T.map(t=>notePill(t,spotFor(pool,t.pc,ref))).join('')}</span></button>`;}).join('')}</div>`;
 }
 let TALK=null;
 function talkPhrases(chs,box){
-  const A=chs[0].c, B=(chs[1]||chs[0]).c, TA=targets3(A), TB=targets3(B), pa=poolFor(A,box), pb=poolFor(B,box), ref=boxMid(box);
+  const A=chs[0].c, B=(A.bars>=4||!chs[1]?chs[0]:chs[1]).c, TA=targets3(A), TB=targets3(B), pa=poolFor(A,box), pb=poolFor(B,box), ref=boxMid(box);
   const askT=TA[2]||TA[0], ansT=TB.find(t=>t.i===0)||TB[0];
   const askEnd=nearestPc(pa,askT.pc,ref), ask=phrase3(pa,askEnd,true);
   const ansEnd=nearestPc(pb,ansT.pc,askEnd?askEnd.midi:ref), ans=phrase3(pb,ansEnd,false);
@@ -1448,7 +1473,7 @@ function miniTab(ps,key){
 }
 function talkBlock(chs,box){
   const P=TALK=talkPhrases(chs,box), same=P.A.name===P.B.name;
-  return `<p>A solo is a conversation. Over <b>${esc(P.A.name)}</b>, <b>ask</b>: 3 notes going up that stop on <b>${esc(nm(P.askT.pc))}</b>, the ${P.askT.word}. It hangs in the air. ${same?'Then':`Over <b>${esc(P.B.name)}</b>,`} <b>answer</b>: 3 notes coming down that land on <b>${esc(nm(P.ansT.pc))}</b>, the root. It sounds finished.</p>
+  return `<p>A solo is a conversation. ${same?'Ask for 2 bars, then answer for 2 bars. ':''}Over <b>${esc(P.A.name)}</b>, <b>ask</b>: 3 notes going up that stop on <b>${esc(nm(P.askT.pc))}</b>, the ${P.askT.word}. It hangs in the air. ${same?`Then <b>answer</b>, still over <b>${esc(P.A.name)}</b>`:`Over <b>${esc(P.B.name)}</b>, <b>answer</b>`}: 3 notes coming down that land on <b>${esc(nm(P.ansT.pc))}</b>, the root. It sounds finished.</p>
   <div class="talk"><div><span class="tlab">Ask · ${esc(P.A.name)}</span><div class="mini">${miniTab(P.ask,'ask')}<button class="btn2" type="button" data-act="ask">▶ Hear</button></div></div><div><span class="tlab">Answer · ${esc(P.B.name)}</span><div class="mini">${miniTab(P.ans,'ans')}<button class="btn2" type="button" data-act="ans">▶ Hear</button></div></div></div>
   <p class="sub">Then make up your own: any 3 notes in the box, as long as the ask stops on a hanging note and the answer lands on the root.</p>`;
 }
@@ -1464,7 +1489,7 @@ function renderCoach(){
   const playBtn=`<button class="btn2" type="button" data-act="play">${playing?'■ Stop':'▶ Play'}</button>`;
   let body='', acts='';
   if(st.k==='listen'){ body=`<p>The solo loops ${esc(loop)}. Press Play and count along with the counter. When it says <b>Ready</b>, a change is coming. When it says <b>Change</b>, the next beat is the new chord.</p><p class="sub">Want the real solo note for note? <a href="${esc(sgrUrl(song()))}" target="_blank" rel="noopener">Open it in Songsterr</a>, slow it down and loop it there. Then come back to see which notes it lands on.</p>`; acts=playBtn; }
-  else if(st.k==='box'){ body=`<p>Stay in <b>position ${POSN(box.k)}</b>, frets <b>${box.a} to ${box.b}</b>. You already know this shape, so there is nothing new to finger.</p><p class="sub">Like another spot better? Move the box with the arrows.</p>`; acts=`<button class="nav" type="button" data-act="prev" aria-label="Move the box down the neck">‹</button><button class="nav" type="button" data-act="next" aria-label="Move the box up the neck">›</button>`; }
+  else if(st.k==='box'){ body=`<p>Stay in <b>position ${POSN(box.k)}</b>, frets <b>${box.a} to ${box.b}</b>. You already know this shape.</p>${(()=>{const nn=newNotes(chs,box); return nn.length?`<p>${nn.length===1?'One note you need is':nn.length+' notes you need are'} not in the shape. Here is how to reach ${nn.length===1?'it':'each one'}, easiest first:</p><ul class="newn">${nn.join('')}</ul>`:'<p>Every note you need is already in it, so there is nothing new to finger.</p>';})()}<p class="sub">Like another spot better? Move the box with the arrows.</p>`; acts=`<button class="nav" type="button" data-act="prev" aria-label="Move the box down the neck">‹</button><button class="nav" type="button" data-act="next" aria-label="Move the box up the neck">›</button>`; }
   else if(st.k==='notes'){ body=`<p>These are the notes that make each chord sound like itself. The <b>3rd</b> matters most. Tap a chord to light up its notes on the neck. The small label says which fret and string.</p>`+notesTable(chs,box); }
   else if(st.k==='land'){ body=`<p>Press Play. On <b>beat 1</b> of every chord, play one of its 3 glowing notes. In between, play anything in your box.</p><p class="sub">Tap <b>Listen</b> up top and Land It will tell you when you nail it.</p>`; acts=playBtn; }
   else if(st.k==='talk'){ body=talkBlock(chs,box); }
@@ -1479,7 +1504,7 @@ function gotoStep(n){S.step=clamp(n,0,STEPS.length-1); save(); renderCoach(); re
 function pickChord(i){VIEW=null; if(playing&&actx){pend.forEach(clearTimeout); pend.clear(); $('count').hidden=true; pIdx=i; pStep=0; nextT=actx.currentTime+.05;} idx=i; renderChips(true); renderNeck(); markCards(true); markCoachChord();}
 $('coach').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b||b.disabled) return;
   if(b.dataset.step!=null){gotoStep(+b.dataset.step); return;}
-  if(b.dataset.chord!=null){const i=+b.dataset.chord; pickChord(i); const c=form()[i], box=litBox(), pool=poolFor(c,box), ref=boxMid(box); hearPhrase(targets3(c).map(t=>nearestPc(pool,t.pc,ref)).filter(Boolean).sort((x,y)=>x.midi-y.midi),c,'n'); return;}
+  if(b.dataset.chord!=null){const i=+b.dataset.chord; pickChord(i); const c=form()[i], box=litBox(), pool=poolFor(c,box), ref=boxMid(box); hearPhrase(targets3(c).map(t=>spotFor(pool,t.pc,ref)).filter(Boolean).sort((x,y)=>x.midi-y.midi),c,'n'); return;}
   const a=b.dataset.act;
   if(a==='fwd') gotoStep(S.step+1); else if(a==='back') gotoStep(S.step-1);
   else if(a==='play') playing?stopPlay():startPlay();
@@ -1491,25 +1516,51 @@ $('coach').addEventListener('click',e=>{const b=e.target.closest('button'); if(!
 /* ---------- starter solo ---------- */
 let ALONG=null, alongPrev=null;
 function buildSolo(){
-  const f=form(), box=litBox(), bpb=song().bpb, evs=[]; let ref=boxMid(box), licks=0;
-  const add=(pi,bar,beat,p,dur,c)=>{if(!p) return; const tm=tmap(c), pc=mod(p.midi); evs.push({pi,bar,beat,step:(bar*bpb+beat)*2,s:p.s,f:p.f,midi:p.midi,dur,i:tm.has(pc)?tm.get(pc):null,c}); ref=p.midi;};
+  const f=form(), box=litBox(), bpb=song().bpb, evs=[], total=f.reduce((a,c)=>a+c.bars,0)||1, K=FRETS+1, ROT=[0,2,0,1], seenN={}, landing=[];
+  let ref=boxMid(box), lastS=3, lastM=-1, g=0, licks=0, pend=null;
+  const lvl=gb=>{const e=gb/total; return e<.8?.15+.85*(e/.8):1-(e-.8)/.2*.45;};          // energy: easy start, peak just before the end, then settle
+  const aim=(pool,L)=>{const lo=pool[0].midi, hi=pool[pool.length-1].midi; return lo+(hi-lo)*(.3+.6*L);};   // middle strings first, higher as it builds
+  const add=(pi,bar,beat,p,dur,c)=>{if(!p||beat>=bpb) return; const snd=p.midi+(p.bend||0), tm=tmap(c), pc=mod(snd);
+    evs.push({pi,bar,beat,step:Math.round((bar*bpb+beat)*2),s:p.s,f:p.f,midi:snd,bend:p.bend||0,dur,i:tm.has(pc)?tm.get(pc):null,c}); ref=snd; lastS=p.s; lastM=snd;};
+  // the blues curl: a half step bend on the G string from the minor 3rd up to the major 3rd
+  const curl=t=>{if(t.i!==4) return null; for(let fr=box.a;fr<=box.b;fr++) if(box.keys.has(3*K+fr)&&mod(STD[3]+fr+1)===t.pc) return {s:3,f:fr,midi:STD[3]+fr,inBox:true,bend:1}; return null;};
+  // which note to land on: mostly the 3rd, sometimes the 7th or 5th, sometimes the root; fretted unless the curl fits
+  const landNote=(c,o,want)=>{const T=targets3(c), t=T[ROT[o%ROT.length]]||T[0]; if(t===T[0]&&o%4===0){const cu=curl(t); if(cu) return cu;}
+    return spotFor(poolFor(c,box),t.pc,want,lastS)||bendTo(box,t.pc,want);};
+  const lead=(pi,bar,c,nt)=>{const pIn=poolFor(c,box).filter(p=>p.inBox&&Math.abs(p.s-nt.s)<=2&&p.midi!==lastM), tgt=nt.midi+(nt.bend||0);
+    const up=pIn.filter(p=>p.midi>tgt).slice(0,2).reverse(), dn=pIn.filter(p=>p.midi<tgt).slice(-2); let ap=!nt.bend&&pi%2===1?dn:up; if(ap.length<2) ap=ap===up?dn:up; if(!ap.length) ap=up;
+    ap.forEach((p,k)=>add(pi,bar,ap.length===2?[bpb-1.5,bpb-1][k]:bpb-1,p,ap.length===2?[.5,1][k]:1,c));};
   f.forEach((c,pi)=>{
-    const T=targets3(c), pool=poolFor(c,box), N=c.bars, nc=f[nextIdx(pi)], nT=targets3(nc)[0], nPool=poolFor(nc,box), rootT=T.find(t=>t.i===0)||T[0];
-    const lead=bar=>{const nt=nearestPc(nPool,nT.pc,ref)||nearestPc(pool,T[0].pc,ref); if(!nt) return; const above=pool.filter(p=>p.midi>nt.midi).slice(0,2).reverse(); if(above[0]) add(pi,bar,bpb-2,above[0],1,c); if(above[1]) add(pi,bar,bpb-1,above[1],1,c);};
-    add(pi,0,0,nearestPc(pool,T[0].pc,ref),2,c);                       // land on the 3rd
-    if(N===1){ lead(0); return; }
-    add(pi,0,2,nearestPc(pool,rootT.pc,ref),Math.max(1,bpb-2),c);      // then the root
-    for(let k=1;k<N-1;k++){ if(k%2===1) continue;                       // a bar of space, then a 3 note lick
-      const ask=licks%2===0, end=nearestPc(pool,(ask?(T[2]||T[0]):rootT).pc,ref); licks++;
-      phrase3(pool,end,ask).forEach((p,j,a)=>add(pi,k,j,p,j===a.length-1?2:1,c)); }
-    add(pi,N-1,0,nearestPc(pool,rootT.pc,ref),Math.max(1,bpb-2),c); lead(N-1);   // set up the next chord
+    const T=targets3(c), pool=poolFor(c,box), poolIn=pool.filter(p=>p.inBox), N=c.bars, rootT=T.find(t=>t.i===0)||T[0], hang=T[2]||T[0], fifth=c.ints.includes(7)&&!T.some(t=>t.i===7)?{pc:mod(c.r+7),i:7}:null;
+    const o=seenN[c.name]||0; seenN[c.name]=o+1;
+    const tgt=pend&&pend.pi===pi?pend.note:landNote(c,o,(ref+aim(pool,lvl(g)))/2); landing[pi]=tgt; pend=null;
+    add(pi,0,0,tgt,2,c);                                                                        // land it on beat 1 and let it ring
+    const np=(pi+1)%f.length, nc=f[np], nextLand=()=>np===0?landing[0]:landNote(nc,seenN[nc.name]||0,(ref+aim(poolFor(nc,box),lvl(g+N)))/2);
+    if(N===1){ const nt=nextLand(); if(np) pend={pi:np,note:nt}; lead(pi,0,c,nt); g+=N; return; }
+    if(lvl(g)>=.4){const p2=spotFor(pool,(T.find(t=>t!==T[0]&&mod(t.pc)!==mod(lastM))||rootT).pc,ref,lastS); if(p2&&p2.midi!==lastM) add(pi,0,2.5,p2,1,c);}
+    for(let k=1;k<N-1;k++){
+      const L=lvl(g+k); if(L<.6&&k%2===1) continue;                                              // early on: a bar of space after each lick
+      const ask=licks%2===0, pair=Math.floor(licks/2); licks++;
+      const endT=ask?(pair%2&&fifth?fifth:hang):rootT, want=L>.85?aim(pool,L):(ref+aim(pool,L))/2;   // ask hangs, answer comes home to the root
+      let Pl=poolIn, end=nearestPc(poolIn,endT.pc,want); if(!end){Pl=pool; end=nearestPc(pool,endT.pc,want);}
+      let ph=phraseV(Pl,end,ask,pair);
+      if(L>.5&&(licks%2===0||L>.85)){const b=bendTo(box,endT.pc,want,2), bi=b?poolIn.findIndex(p=>p.midi===b.midi):-1;
+        if(bi>=0){const pb=phraseV(poolIn,poolIn[bi],ask,pair); if(!pb.slice(0,-1).some(p=>mod(p.midi)===endT.pc)){pb[pb.length-1]=b; ph=pb;}}}   // a ring finger bend to finish
+      const rh=RH3[L<.35?0:(L<.6?(licks%2?1:0):(licks%2?2:3))];
+      ph.forEach((p,n)=>add(pi,k,rh[n][0],p,n===ph.length-1?2:rh[n][1],c));
+    }
+    const p1=spotFor(pool,(T.find(t=>mod(t.pc)!==mod(lastM))||rootT).pc,ref,lastS); if(p1) add(pi,N-1,1,p1,1,c);   // a new note on beat 2
+    const nt=nextLand(); if(np) pend={pi:np,note:nt}; lead(pi,N-1,c,nt);                        // then walk into the next landing
+    g+=N;
   });
   const map=new Map(); evs.forEach((e,j)=>{e.j=j; const k=e.pi+':'+e.step; if(!map.has(k)) map.set(k,[]); map.get(k).push(e);});
   ALONG={evs,map,box,bpb};
 }
-function pluckAt(midi,tAbs,durSec){
+const RH3=[[[0,1],[1,1],[2,2]],[[.5,.5],[1,1],[2,2]],[[0,.5],[.5,.5],[1,2]],[[1,.5],[1.5,.5],[2,2]]];   // [beat, length] for the 3 notes of a lick
+function pluckAt(midi,tAbs,durSec,bend){
   if(!actx) return; const t=Math.max(actx.currentTime+.005,tAbs), o=actx.createOscillator(), o2=actx.createOscillator(), lp=actx.createBiquadFilter(), g=actx.createGain(), len=Math.min(2.2,Math.max(.35,durSec+.2));
   o.type='sawtooth'; o2.type='triangle'; o.frequency.value=o2.frequency.value=mf(midi); o2.detune.value=6;
+  if(bend) [o,o2].forEach(x=>{x.frequency.setValueAtTime(mf(midi),t); x.frequency.setValueAtTime(mf(midi),t+.05); x.frequency.linearRampToValueAtTime(mf(midi+bend),t+.2);});
   lp.type='lowpass'; lp.frequency.setValueAtTime(5200,t); lp.frequency.exponentialRampToValueAtTime(900,t+.4);
   g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.3,t+.004); g.gain.setTargetAtTime(.0001,t+len*.6,len*.15);
   o.connect(lp); o2.connect(lp); lp.connect(g); g.connect(master); o.start(t); o2.start(t); o.stop(t+len+.8); o2.stop(t+len+.8);
@@ -1522,7 +1573,7 @@ function alongLight(ev){
 function markAlongBar(pi,bar){document.querySelectorAll('#alongTab .tb.now').forEach(e=>e.classList.remove('now')); const e=document.querySelector(`#alongTab .tb[data-pi="${pi}"][data-bar="${bar}"]`); if(e) e.classList.add('now');}
 function renderAlong(){
   const el=$('along'); if(!el) return; if(!ALONG) buildSolo(); const {evs,bpb,box}=ALONG, f=form(), first=!el.firstChild||el.dataset.song!==song().id||el.dataset.mode!=='along';
-  const avail=Math.max(200,(el.clientWidth||900)-30), BW=avail<520?Math.max(28,Math.min(40,Math.floor(((avail-18)/2-24)/bpb))):40, bw=bpb*BW+24, KW=18, per=Math.max(1,Math.floor((avail-KW)/bw)), TY=16, SG=13, H=TY+SG*5+14, y=s2=>TY+(5-s2)*SG;
+  const avail=Math.max(200,(el.clientWidth||900)-30), BW=avail<520?Math.max(28,Math.min(40,Math.floor(((avail-18)/2-24)/bpb))):40, bw=bpb*BW+24, KW=18, per=Math.max(1,Math.floor((avail-KW)/bw)), TY=24, SG=13, H=TY+SG*5+14, y=s2=>TY+(5-s2)*SG;
   const cells=[]; f.forEach((c,pi)=>{for(let k=0;k<c.bars;k++) cells.push({c,pi,k});});
   const key=`<svg class="tkey" viewBox="0 0 ${KW} ${H}" width="${KW}" height="${H}" aria-hidden="true">${SSN.map((n,s2)=>`<text x="${KW/2-2}" y="${y(s2)}">${n}</text>`).join('')}</svg>`;
   let rows='';
@@ -1532,11 +1583,13 @@ function renderAlong(){
       for(let s2=0;s2<6;s2++) h+=`<line x1="0" x2="${bw}" y1="${y(s2)}" y2="${y(s2)}" class="tl"/>`;
       h+=`<line x1="${bw-.75}" x2="${bw-.75}" y1="${y(5)}" y2="${y(0)}" class="tbar"/>`;
       if(!ev.length) h+=`<text x="${bw/2}" y="${y(2.5)}" class="trest">breathe</text>`;
-      ev.forEach(e=>{const x=16+e.beat*BW, yy=y(e.s), wd=String(e.f).length>1?22:14; h+=`<g class="an" data-j="${e.j}"><rect x="${x-wd/2}" y="${yy-8}" width="${wd}" height="16" rx="4"/><text x="${x}" y="${yy+.5}">${e.f}</text>${e.i!=null?`<line x1="${x-5}" x2="${x+5}" y1="${yy+10}" y2="${yy+10}" style="stroke:var(--n-${roleOf(e.i,e.c.ints)})"/>`:''}</g>`;});
+      ev.forEach(e=>{const x=16+e.beat*BW, yy=y(e.s), two=String(e.f).length>1, sm=two&&ev.some(o=>o!==e&&Math.abs(o.beat-e.beat)<=.5), wd=two?(sm?18:22):14;
+        if(e.bend){const x0=x+wd/2+1, y0=yy-3; h+=`<path class="bnd" d="M${x0} ${y0} Q${x0+8} ${y0} ${x0+9} ${y0-11} M${x0+5.5} ${y0-8} L${x0+9} ${y0-12} L${x0+12} ${y0-8}"/><text class="bl" x="${x0+10}" y="${y0-16}">${e.bend===2?'full':'½'}</text>`;}
+        h+=`<g class="an${sm?' sm':''}" data-j="${e.j}"><rect x="${x-wd/2}" y="${yy-8}" width="${wd}" height="16" rx="4"/><text x="${x}" y="${yy+.5}">${e.f}</text>${e.i!=null?`<line x1="${x-5}" x2="${x+5}" y1="${yy+10}" y2="${yy+10}" style="stroke:var(--n-${roleOf(e.i,e.c.ints)})"/>`:''}</g>`;});
       return h+'</svg></div>';}).join('')+'</div>';
   }
   el.innerHTML=`<div class="${first?'enter':''}"><div class="phead"><h2>Starter solo</h2><div class="seg" id="segTurn" aria-label="Who plays the solo"><button type="button" data-v="hear">Hear the solo</button><button type="button" data-v="mine">My turn</button></div><button class="btn2" type="button" id="alongPlay">${playing?'■ Stop':'▶ Play with the band'}</button></div>
-    <p class="plead">${S.myTurn?'Your turn. The band plays and the notes still light up. You play them. With Listen on, each note turns green when you get it and red when you miss.':'Listen once, then switch to <b>My turn</b> and play it yourself.'} It lives in your box at frets ${box.a} to ${box.b}, lands on each chord's 3rd, and leaves space to breathe.</p>
+    <p class="plead">${S.myTurn?'Your turn. The band plays and the notes still light up. You play them. With Listen on, each note turns green when you get it and red when you miss.':'Listen once, then switch to <b>My turn</b> and play it yourself.'} It stays in your box at frets ${box.a} to ${box.b}, lands on each chord's 3rd, starts easy and builds to a peak. An arrow means bend: <b>½</b> is one fret higher, <b>full</b> is two.</p>
     <div class="altab" id="alongTab"><div class="arows">${rows}</div></div><p class="score" id="alongScore"></p></div>`;
   el.dataset.song=song().id; el.dataset.mode='along';
   setPressed('segTurn',S.myTurn?'mine':'hear'); showScore();
@@ -1619,7 +1672,7 @@ function noteOn(midi,now){
   if(S.mode==='along'&&S.myTurn&&playing){
     const w=NW.find(x=>!x.done&&now>=x.start&&now<=x.end&&x.pc===pc);
     if(w){hitNote(w); mt=[`Right! ${nm(pc)}`,'win'];}
-    else {const want=NW.filter(x=>!x.done&&now>=x.start).pop(); if(want) mt=[`Wanted ${nm(want.pc)}, you played ${nm(pc)}`,'out'];}
+    else {const want=NW.filter(x=>!x.done&&now>=x.start).pop(); if(want){const d=mod(want.pc-pc); mt=want.ev.bend&&d>=1&&d<=2?[`Keep bending up to ${nm(want.pc)}`,'chord']:[`Wanted ${nm(want.pc)}, you played ${nm(pc)}`,'out'];}}
   }
   let won=false;
   if(LS.win&&!LS.win.done&&now>=LS.win.start&&now<=LS.win.end&&targets3(LS.win.chord).some(t=>t.pc===pc)){LS.win.done=true; LS.landed++; won=true;}
@@ -1639,8 +1692,8 @@ function songCard(id){
   try{
     const sg=song(), ins=insts(), anc=S.fpos[fkey()]; let i=anc!=null?ins.findIndex(x=>x.a===anc):-1; if(i<0) i=Math.min(defaultFocus(1),ins.length-1);
     const box=ins[i], f=form(), seen=new Set(), t=tuning(), ref=boxMid(box);
-    const rows=f.filter(c=>!seen.has(c.name)&&seen.add(c.name)).map(c=>{const pool=poolFor(c,box); return `<li><b class="gch">${esc(c.name)}</b><span class="pills">${targets3(c).map(x=>notePill(x,nearestPc(pool,x.pc,ref))).join('')}</span></li>`;}).join('');
-    return `<article class="gcard"><header><h3>${esc(sg.title)}</h3><span>${esc(sg.artist)}${sg.section?' · '+esc(sg.section):''}</span><span class="ghead"><button type="button" class="practice" data-song="${esc(sg.id)}">Practice this</button><a href="${esc(sgrUrl(sg))}" target="_blank" rel="noopener">Songsterr tab ↗</a></span></header><p class="gkey"><b>${esc(keyName())} ${sg.mode}</b>${t?` · ${TUN_SHORT[String(t)]} tuning, ${esc(nm(keyS()))} shapes`:''} · Box: position ${POSN(box.k)}, frets ${box.a} to ${box.b}</p><ul class="grows">${rows}</ul></article>`;
+    const rows=f.filter(c=>!seen.has(c.name)&&seen.add(c.name)).map(c=>{const pool=poolFor(c,box); return `<li><b class="gch">${esc(c.name)}</b><span class="pills">${targets3(c).map(x=>notePill(x,spotFor(pool,x.pc,ref))).join('')}</span></li>`;}).join('');
+    return `<article class="gcard"><header><h3>${esc(sg.title)}</h3><span>${esc(sg.artist)}${sg.section?' · '+esc(sg.section):''}</span><span class="ghead"><button type="button" class="practice" data-song="${esc(sg.id)}">Practice this</button><a href="${esc(sgrUrl(sg))}" target="_blank" rel="noopener">Songsterr tab ↗</a></span></header><p class="gkey"><b>${esc(keyName())} ${keyWord()}</b>${t?` · ${TUN_SHORT[String(t)]} tuning, ${esc(nm(keyS()))} shapes`:''} · Box: position ${POSN(box.k)}, frets ${box.a} to ${box.b}</p><ul class="grows">${rows}</ul></article>`;
   } finally { S.cur=keep; invalidate(); }
 }
 function renderGig(){
