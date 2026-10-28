@@ -311,7 +311,12 @@ button{cursor:pointer}
 .cstep a,.gcard a{color:var(--accent); font-weight:800}
 .gcard header a{font-size:13px; justify-self:start}
 #coachWrap,#alongWrap,#gigWrap{display:none}
-body[data-mode="coach"] #coachWrap,body[data-mode="along"] #alongWrap,body[data-mode="gig"] #gigWrap{display:block}
+body[data-mode="coach"] #coachWrap,body[data-mode="along"] #alongWrap,body[data-mode="gig"] #gigWrap,body[data-mode="free"] #coachWrap,body[data-mode="free"].solo #alongWrap{display:block}
+.modebar .modes{display:none!important}
+body[data-mode="free"] #coachWrap{margin-top:22px}
+body[data-mode="free"].solo #alongWrap{margin-top:14px}
+.cnav .gigl{border:0; background:transparent; color:var(--accent); font-weight:800; font-size:13px; padding:4px 2px; margin-left:auto}
+.cnav{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
 body:not([data-mode="free"]) #toolsWrap,body:not([data-mode="free"]) #tabWrap,body:not([data-mode="free"]) #shapesWrap{display:none}
 body[data-mode="gig"] .neckband,body[data-mode="gig"] .chordrow{display:none}
 .modebar{display:flex; flex-wrap:wrap; gap:10px 12px; align-items:center}
@@ -444,8 +449,6 @@ button,.seg button,.modes button{touch-action:manipulation}
   <div class="count" id="count" hidden><b id="countNum">1</b></div>
   <div class="heard" id="heard" hidden aria-live="polite"></div>
 </section>
-<div class="gut" id="coachWrap"><div class="app"><section class="coach" id="coach" aria-label="Coach"></section></div></div>
-<div class="gut" id="alongWrap"><div class="app"><section class="along" id="along" aria-label="Play along"></section></div></div>
 <div class="gut" id="gigWrap"><div class="app"><section class="gig" id="gig" aria-label="Gig sheet"></section></div></div>
 
 <div class="gut" id="toolsWrap"><div class="app">
@@ -466,6 +469,8 @@ button,.seg button,.modes button{touch-action:manipulation}
     </div>
   </div>
 </div></div>
+<div class="gut" id="coachWrap"><div class="app"><section class="coach" id="coach" aria-label="How to play it"></section></div></div>
+<div class="gut" id="alongWrap"><div class="app"><section class="along" id="along" aria-label="Starter solo"></section></div></div>
 <div class="gut" id="tabWrap"><div class="tabband">
   <section class="tabsec" aria-label="Arpeggio tab">
     <div class="tabhead"><h2>Arpeggio tab <small id="tabWhere"></small></h2>
@@ -1243,7 +1248,7 @@ function runStep(t){
   if(pStep>=f[pIdx].bars*n){pIdx=(pIdx+1)%f.length; pStep=0;}
   const c=f[pIdx], s=pStep%n, st=pattern(), tt=t+((s%2&&st.swing)?stepDur()*st.swing:0);
   if(actx){ if(S.sound==='band') playBand({r:c.cr,ints:c.ints},s,tt,st); else if(S.sound==='click'&&s%2===0) blip(t,s===0); }
-  if(S.mode==='along'&&ALONG){const evs=ALONG.map.get(pIdx+':'+pStep); if(evs) evs.forEach(ev=>{ if(!S.myTurn&&actx) pluckAt(realMidi(ev.s,ev.f),t,ev.dur*60/bpm(),ev.bend); later(t,()=>alongLight(ev)); });}
+  if(alongOn()&&ALONG){const evs=ALONG.map.get(pIdx+':'+pStep); if(evs) evs.forEach(ev=>{ if(!S.myTurn&&actx) pluckAt(realMidi(ev.s,ev.f),t,ev.dur*60/bpm(),ev.bend); later(t,()=>alongLight(ev)); });}
   if(s%2===0){const pi=pIdx, b=pStep/2; later(t,()=>onBeat(pi,b));}
   pStep++;
 }
@@ -1251,9 +1256,9 @@ function scheduler(){while(nextT<actx.currentTime+.12){runStep(nextT); nextT+=st
 function countVis(k){$('beatBig').textContent=k; $('beatBig').className=''; $('beatSub').textContent='count in'; $('beat').hidden=false; $('count').hidden=false; const b=$('countNum'); b.textContent=k; b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');}
 function onBeat(pi,b){
   $('count').hidden=true;
-  if(pi!==idx){idx=pi; renderChips(true); renderNeck(); markCards(true); if(S.mode==='coach') markCoachChord();}
+  if(pi!==idx){idx=pi; renderChips(true); renderNeck(); markCards(true); if(S.mode!=='gig') markCoachChord();}
   if(b===0) openLandWindow(form()[pi]);
-  if(S.mode==='along') markAlongBar(pi,Math.floor(b/song().bpb));
+  if(alongOn()) markAlongBar(pi,Math.floor(b/song().bpb));
   setProgress(b); showBeat(pi,b);
 }
 function startPlay(){
@@ -1341,7 +1346,7 @@ $('tRange').addEventListener('input',e=>setTempo(e.target.value));
 $('segDir').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; S.tabDir=b.dataset.v; save(); stopTab(); renderTab();});
 $('tabHear').addEventListener('click',hearTab);
 $('tabCopy').addEventListener('click',copyTab);
-let rzT=null; window.addEventListener('resize',()=>{clearTimeout(rzT); rzT=setTimeout(()=>{if(!tabTimers.length) renderTab(); if(S.mode==='along') renderAlong();},150);});
+let rzT=null; window.addEventListener('resize',()=>{clearTimeout(rzT); rzT=setTimeout(()=>{if(!tabTimers.length) renderTab(); if(alongOn()) renderAlong();},150);});
 $('tab').addEventListener('click',e=>{const g=e.target.closest('.tn'); if(!g) return; const s2=+g.dataset.s, f2=+g.dataset.f, nt=tabNoteAt(+g.dataset.k); focusNote(s2,f2,1500,false,nt&&nt.c); g.classList.add('on'); setTimeout(()=>g.classList.remove('on'),320);});
 $('tReset').addEventListener('click',()=>setTempo(song().bpm));
 $('chips').addEventListener('click',e=>{const b=e.target.closest('.chip'); if(!b) return; const c=(window._kc||[])[+b.dataset.j]; if(!c) return;
@@ -1389,8 +1394,9 @@ const SONGSTERR={'so-into-you':'https://www.songsterr.com/a/wsa/atlanta-rhythm-s
 function sgrUrl(sg){return SONGSTERR[sg.id]||('https://www.songsterr.com/?pattern='+encodeURIComponent((sg.title+' '+(sg.artist||'')).trim()));}
 const DEGWORD={'R':'root','3':'3rd','♭3':'3rd','5':'5th','♭5':'♭5','♯5':'♯5','♭7':'♭7','7':'7th','6':'6th','9':'9th'};
 const SSN=['E','A','D','G','B','e'], STR_LBL=['low E','A','D','G','B','high e'];
+function alongOn(){return S.mode==='along'||(S.mode==='free'&&STEPS[S.step]&&STEPS[S.step].k==='solo');}
 const STEPS=[{k:'listen',t:'Listen first'},{k:'box',t:'Your box'},{k:'notes',t:'Your 3 notes'},{k:'land',t:'Land it'},{k:'talk',t:'Ask, then answer'},{k:'solo',t:'Your starter solo'}];
-if(!LIT_MODES.includes(S.mode)) S.mode='coach';
+S.mode='free';
 S.step=clamp(+S.step||0,0,STEPS.length-1); S.myTurn=!!S.myTurn;
 
 // the 3 notes worth landing on: the 3rd, the root, then the 7th (or the 5th)
@@ -1399,7 +1405,9 @@ function targets3(c){
   [t3,0,t7!=null?t7:t5,t5].forEach(i=>{if(i!=null&&!out.includes(i)) out.push(i);});
   return out.slice(0,3).map(i=>{const dg=deg(i,c.ints); return {i,pc:mod(c.r+i),role:roleOf(i,c.ints),deg:dg,word:i===0?'root':(DEGWORD[dg]||dg)};});
 }
-function litBox(){const fi=S.str==null?focusInfo():null; return fi?fi.list[0]:insts()[defaultFocus(1)];}
+function litBox(){const fi=S.str==null?focusInfo():null; if(!fi) return insts()[defaultFocus(1)]; if(fi.list.length===1) return fi.list[0];
+  const keys=new Set(); fi.list.forEach(b=>b.keys.forEach(k=>keys.add(k))); return {k:fi.list[0].k,a:fi.a,b:fi.b,keys,list:fi.list};}
+const subBox=(box,fr)=>(box.list||[box]).find(b=>fr>=b.a&&fr<=b.b)||box;
 // every note you can reach in the box: the box's scale notes plus this chord's tones inside its frets
 function poolFor(c,box){
   const K=FRETS+1, tm=tmap(c), out=new Map();
@@ -1422,7 +1430,7 @@ function setMode(v){
   S.mode=v; save(); VIEW=null; document.body.dataset.mode=v; setPressed('modes',v);
   renderChips(); renderNeck(); renderTools(); renderCards(); requestAnimationFrame(centerOnFocus);
 }
-function renderModePanel(){const v=S.mode; if(v==='coach') renderCoach(); else if(v==='along'){buildSolo(); renderAlong();} else if(v==='gig') renderGig();}
+function renderModePanel(){const v=S.mode, so=alongOn(); document.body.classList.toggle('solo',so); if(v==='coach'||v==='free') renderCoach(); if(so){buildSolo(); renderAlong();} else if(v==='gig') renderGig();}
 function syncPlayLabels(){document.querySelectorAll('[data-act="play"]').forEach(b=>b.textContent=playing?'■ Stop':'▶ Play'); const ap=$('alongPlay'); if(ap) ap.textContent=playing?'■ Stop':'▶ Play with the band';}
 
 /* ---------- the 3 notes lens on the neck ---------- */
@@ -1440,7 +1448,7 @@ function notePill(t,p){return `<span class="npill" style="--c:var(--n-${t.role})
 // a box note on B, G or high e that bends up to this note (whole step first, then half step)
 function bendTo(box,pc,ref,semis){
   let best=null,bd=1e9; const K=FRETS+1;
-  [4,3,5].forEach(s2=>(semis?[semis]:[2,1]).forEach(st=>{for(let fr=Math.max(1,box.a);fr<=Math.min(FRETS-2,box.b);fr++){ if(!box.keys.has(s2*K+fr)||(st===2&&fr<box.a+2)) continue; const m=STD[s2]+fr; if(mod(m+st)!==pc) continue;
+  [4,3,5].forEach(s2=>(semis?[semis]:[2,1]).forEach(st=>{for(let fr=Math.max(1,box.a);fr<=Math.min(FRETS-2,box.b);fr++){ if(!box.keys.has(s2*K+fr)||(st===2&&fr<subBox(box,fr).a+2)) continue; const m=STD[s2]+fr; if(mod(m+st)!==pc) continue;
     const d=Math.abs(m+st-ref)+(st===1?1:0)+(s2===5?1:0); if(d<bd){bd=d; best={s:s2,f:fr,midi:m,inBox:true,bend:st};}}}));
   return best;
 }
@@ -1448,7 +1456,7 @@ function bendTo(box,pc,ref,semis){
 function newNotes(chs,box){
   const out=[], seen=new Set(), ref=boxMid(box), K=FRETS+1, FW=['index','middle','ring','pinky'];
   chs.forEach(({c})=>{const pool=poolFor(c,box); targets3(c).forEach(t=>{const p=spotFor(pool,t.pc,ref); if(!p||p.inBox||seen.has(c.name+t.pc)) return; seen.add(c.name+t.pc);
-    const ways=[`fret ${p.f} on ${STR_LBL[p.s]} with your ${FW[clamp(p.f-box.a,0,3)]} finger`];
+    const ways=[`fret ${p.f} on ${STR_LBL[p.s]} with your ${FW[clamp(p.f-subBox(box,p.f).a,0,3)]} finger`];
     const hm=box.keys.has(p.s*K+p.f-1)?p.f-1:(box.keys.has(p.s*K+p.f-2)?p.f-2:null); if(hm!=null) ways.push(`hammer on from ${hm} to ${p.f}`);
     const b=bendTo(box,t.pc,p.midi); if(b) ways.push(`bend ${b.f} on ${STR_LBL[b.s]} up ${b.bend===2?'a whole step':'a half step'}`);
     out.push(`<li><b>${esc(nm(t.pc))}</b>, the ${t.word} of ${esc(c.name)}: ${ways.join(', or ')}.</li>`);});});
@@ -1489,18 +1497,18 @@ function renderCoach(){
   const playBtn=`<button class="btn2" type="button" data-act="play">${playing?'■ Stop':'▶ Play'}</button>`;
   let body='', acts='';
   if(st.k==='listen'){ body=`<p>The solo loops ${esc(loop)}. Press Play and count along with the counter. When it says <b>Ready</b>, a change is coming. When it says <b>Change</b>, the next beat is the new chord.</p><p class="sub">Want the real solo note for note? <a href="${esc(sgrUrl(song()))}" target="_blank" rel="noopener">Open it in Songsterr</a>, slow it down and loop it there. Then come back to see which notes it lands on.</p>`; acts=playBtn; }
-  else if(st.k==='box'){ body=`<p>Stay in <b>position ${POSN(box.k)}</b>, frets <b>${box.a} to ${box.b}</b>. You already know this shape.</p>${(()=>{const nn=newNotes(chs,box); return nn.length?`<p>${nn.length===1?'One note you need is':nn.length+' notes you need are'} not in the shape. Here is how to reach ${nn.length===1?'it':'each one'}, easiest first:</p><ul class="newn">${nn.join('')}</ul>`:'<p>Every note you need is already in it, so there is nothing new to finger.</p>';})()}<p class="sub">Like another spot better? Move the box with the arrows.</p>`; acts=`<button class="nav" type="button" data-act="prev" aria-label="Move the box down the neck">‹</button><button class="nav" type="button" data-act="next" aria-label="Move the box up the neck">›</button>`; }
+  else if(st.k==='box'){ body=`<p>${S.focus==='all'?'All the boxes are showing, so these steps use the main one. ':''}Stay in <b>${box.list?'positions '+box.list.map(b=>POSN(b.k)).join(' + '):'position '+POSN(box.k)}</b>, frets <b>${box.a} to ${box.b}</b>. You already know ${box.list?'these shapes':'this shape'}.</p>${(()=>{const nn=newNotes(chs,box); return nn.length?`<p>${nn.length===1?'One note you need is':nn.length+' notes you need are'} not in the shape. Here is how to reach ${nn.length===1?'it':'each one'}, easiest first:</p><ul class="newn">${nn.join('')}</ul>`:'<p>Every note you need is already in it, so there is nothing new to finger.</p>';})()}<p class="sub">Want a different spot? Slide your boxes with the arrows under the neck, or pick 1 box, 2 boxes or All. These steps follow whatever you pick.</p>`; }
   else if(st.k==='notes'){ body=`<p>These are the notes that make each chord sound like itself. The <b>3rd</b> matters most. Tap a chord to light up its notes on the neck. The small label says which fret and string.</p>`+notesTable(chs,box); }
   else if(st.k==='land'){ body=`<p>Press Play. On <b>beat 1</b> of every chord, play one of its 3 glowing notes. In between, play anything in your box.</p><p class="sub">Tap <b>Listen</b> up top and Land It will tell you when you nail it.</p>`; acts=playBtn; }
   else if(st.k==='talk'){ body=talkBlock(chs,box); }
-  else if(st.k==='solo'){ body=`<p>Now put it all together. I built a simple solo from your box and your 3 notes. Hear it once, then play it yourself with the band.</p>`; acts=`<button class="btn2" type="button" data-act="along">Open Play along</button>`; }
+  else if(st.k==='solo'){ body=`<p>Now put it all together. Here is a simple solo built from your boxes and your 3 notes. It is right below: hear it once, then switch to <b>My turn</b> and play it with the band.</p>`; }
   const fresh=el.dataset.k!==S.step+'|'+song().id; el.dataset.k=S.step+'|'+song().id;
-  el.innerHTML=`<div class="cstep${fresh?' enter':''}"><div class="cnav"><span class="cno">Step ${S.step+1} of ${STEPS.length}</span><span class="dots">${STEPS.map((x,j)=>`<button type="button" class="dot${j===S.step?' on':''}" data-step="${j}" aria-label="Step ${j+1}: ${x.t}"></button>`).join('')}</span></div>
+  el.innerHTML=`<div class="cstep${fresh?' enter':''}"><div class="cnav"><span class="cno">How to play it · Step ${S.step+1} of ${STEPS.length}</span><span class="dots">${STEPS.map((x,j)=>`<button type="button" class="dot${j===S.step?' on':''}" data-step="${j}" aria-label="Step ${j+1}: ${x.t}"></button>`).join('')}</span><button type="button" class="gigl" data-act="gig">All songs ↗</button></div>
     <h2>${st.t}</h2>${body}<div class="cacts">${acts}<span class="grow"></span><p class="score" id="coachScore"></p><button class="btn2 ghost" type="button" data-act="back"${S.step===0?' disabled':''}>Back</button><button class="btn2" type="button" data-act="fwd"${S.step===STEPS.length-1?' disabled':''}>Next</button></div></div>`;
   showScore();
 }
 function markCoachChord(){const cn=form()[idx]&&form()[idx].name; document.querySelectorAll('#coach .nrow').forEach(r=>{const c=form()[+r.dataset.chord]; r.classList.toggle('on',!!c&&c.name===cn);});}
-function gotoStep(n){S.step=clamp(n,0,STEPS.length-1); save(); renderCoach(); renderNeck();}
+function gotoStep(n){S.step=clamp(n,0,STEPS.length-1); save(); renderModePanel(); renderNeck();}
 function pickChord(i){VIEW=null; if(playing&&actx){pend.forEach(clearTimeout); pend.clear(); $('count').hidden=true; pIdx=i; pStep=0; nextT=actx.currentTime+.05;} idx=i; renderChips(true); renderNeck(); markCards(true); markCoachChord();}
 $('coach').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b||b.disabled) return;
   if(b.dataset.step!=null){gotoStep(+b.dataset.step); return;}
@@ -1509,7 +1517,7 @@ $('coach').addEventListener('click',e=>{const b=e.target.closest('button'); if(!
   if(a==='fwd') gotoStep(S.step+1); else if(a==='back') gotoStep(S.step-1);
   else if(a==='play') playing?stopPlay():startPlay();
   else if(a==='prev'||a==='next'){const fi=focusInfo(); if(fi){setFocus(fi.i+(a==='prev'?-1:1)); centerOnFocus();}}
-  else if(a==='along') setMode('along');
+  else if(a==='gig'){setMode('gig'); window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});}
   else if(a==='ask'&&TALK) hearPhrase(TALK.ask,TALK.A,'ask'); else if(a==='ans'&&TALK) hearPhrase(TALK.ans,TALK.B,'ans');
 });
 
@@ -1603,7 +1611,7 @@ const NW=[];
 function markNote(ev,k){const e=document.querySelector(`#alongTab .an[data-j="${ev.j}"]`); if(e){e.classList.remove('ok','miss'); if(k) e.classList.add(k);}}
 function hitNote(w){w.done=true; LS.nOk++; LS.nTot++; markNote(w.ev,'ok'); const i=NW.indexOf(w); if(i>=0) NW.splice(i,1); showScore();}
 function openNoteWindow(ev){
-  if(!LS.on||!S.myTurn||S.mode!=='along') return;
+  if(!LS.on||!S.myTurn||!alongOn()) return;
   const now=performance.now(), w={ev,pc:mod(ev.midi),start:now-220,end:now+Math.max(480,ev.dur*60000/bpm())+160,done:false};
   markNote(ev,null);
   const pre=LS.recent.find(r=>r.t>=w.start&&!r.used&&mod(r.midi-tuning())===w.pc);
@@ -1613,7 +1621,7 @@ function openNoteWindow(ev){
 }
 const LS={on:false,stream:null,src:null,an:null,buf:null,timer:0,cand:-1,candN:0,last:-1,lastT:0,prevRms:0,recent:[],landed:0,total:0,win:null};
 function heardMsg(t,err,kind,link){const h=$('heard'); h.textContent=t; if(link){const a=document.createElement('a'); a.href=link; a.target='_blank'; a.rel='noopener'; a.textContent=' Open it now ↗'; h.appendChild(a);} h.hidden=false; h.className='heard'+(err?' err':'')+(kind?' k-'+kind:''); clearTimeout(heardMsg.t); if(err) heardMsg.t=setTimeout(()=>{h.hidden=true;},9000);}
-function showScore(){let t=''; if(LS.on){const p=[]; if(S.mode==='along'&&S.myTurn&&LS.nTot) p.push(`Notes right: ${LS.nOk} of ${LS.nTot}`); if(LS.total) p.push(`Landed ${LS.landed} of ${LS.total} changes`); t=p.join(' · ')||'Listening';} ['coachScore','alongScore'].forEach(id=>{const e=$(id); if(e) e.textContent=t;});}
+function showScore(){let t=''; if(LS.on){const p=[]; if(alongOn()&&S.myTurn&&LS.nTot) p.push(`Notes right: ${LS.nOk} of ${LS.nTot}`); if(LS.total) p.push(`Landed ${LS.landed} of ${LS.total} changes`); t=p.join(' · ')||'Listening';} ['coachScore','alongScore'].forEach(id=>{const e=$(id); if(e) e.textContent=t;});}
 async function listenToggle(){
   if(LS.on){stopListen(); return;}
   const md=navigator.mediaDevices;
@@ -1669,7 +1677,7 @@ function noteOn(midi,now){
   if(best){const m=M[best.s*(FRETS+1)+best.f]; litAt(best.s,best.f,450,cur,tm.has(pc)?tm.get(pc):null); if(m){m.o.classList.remove('hd-tgt','hd-chord','hd-scale','hd-out'); void m.o.getBoundingClientRect(); m.o.classList.add('hd-'+kind); setTimeout(()=>m.o.classList.remove('hd-'+kind),800);}}
   const word=tt?`the ${tt.word} of ${cur.name}`:(kind==='chord'?`in ${cur.name}`:(kind==='scale'?'in the scale':'outside the key'));
   let mt=null;
-  if(S.mode==='along'&&S.myTurn&&playing){
+  if(alongOn()&&S.myTurn&&playing){
     const w=NW.find(x=>!x.done&&now>=x.start&&now<=x.end&&x.pc===pc);
     if(w){hitNote(w); mt=[`Right! ${nm(pc)}`,'win'];}
     else {const want=NW.filter(x=>!x.done&&now>=x.start).pop(); if(want){const d=mod(want.pc-pc); mt=want.ev.bend&&d>=1&&d<=2?[`Keep bending up to ${nm(want.pc)}`,'chord']:[`Wanted ${nm(want.pc)}, you played ${nm(pc)}`,'out'];}}
@@ -1698,10 +1706,10 @@ function songCard(id){
 }
 function renderGig(){
   const el=$('gig'); if(!el) return; const lib=library();
-  el.innerHTML=`<div class="enter"><div class="phead"><h2>Gig sheet</h2></div><p class="plead">Every song, your box, and the 3 notes to land on each chord. The small label says which fret and string.</p><div class="gcards">${lib.map(sg=>songCard(sg.id)).join('')}</div></div>`;
+  el.innerHTML=`<div class="enter"><div class="phead"><h2>Gig sheet</h2><button class="btn2" type="button" id="gigBack">Back to the neck</button></div><p class="plead">Every song, your box, and the 3 notes to land on each chord. The small label says which fret and string.</p><div class="gcards">${lib.map(sg=>songCard(sg.id)).join('')}</div></div>`;
 }
 
-$('gig').addEventListener('click',e=>{const b=e.target.closest('.practice'); if(!b) return; S.step=2; selectSong(b.dataset.song); setMode('coach'); window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});});
+$('gig').addEventListener('click',e=>{if(e.target.closest('#gigBack')){setMode('free'); window.scrollTo({top:0}); return;} const b=e.target.closest('.practice'); if(!b) return; S.step=2; selectSong(b.dataset.song); setMode('free'); window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});});
 const SKINS=[{k:'classic',n:'Classic',bg:'#EEEAE4',ac:'#B4551C'},{k:'tweed',n:'Tweed',bg:'#E8DAC0',ac:'#8E2A23'},{k:'seafoam',n:'Seafoam',bg:'#D9EEE4',ac:'#DD4B36'},{k:'charvel',n:'Charvel purple',bg:'#EAE5F4',ac:'#6A3BBE'},{k:'halloween',n:'Halloween',bg:'#F3E1C6',ac:'#E8620E'}];
 function applySkin(k){if(!SKINS.some(x=>x.k===k)) k='classic'; S.skin=k; if(k==='classic') delete document.documentElement.dataset.skin; else document.documentElement.dataset.skin=k;
   $('thPanel').innerHTML=SKINS.map(x=>`<button type="button" data-skin="${x.k}" aria-pressed="${x.k===k}"><i style="background:linear-gradient(135deg,${x.bg} 0 50%,${x.ac} 50%)"></i>${x.n}</button>`).join('');}
@@ -1713,7 +1721,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape') thOpen(false);});
 applySkin(S.skin);
 $('modes').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) setMode(b.dataset.v);});
 document.body.dataset.mode=S.mode; setPressed('modes',S.mode);
-if(S.mode==='coach'||S.mode==='along') enterLens();
+if(S.freeSave) leaveLens();
 
 buildNeck(); renderAll(); $('play').textContent=S.sound==='off'?'▶ Start on 1':'▶ Play';
 requestAnimationFrame(centerOnFocus);
